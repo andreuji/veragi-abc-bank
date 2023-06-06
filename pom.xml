@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>2.5.5</version>
+        <relativePath></relativePath>
+    </parent>
+    <groupId>br.com.accesstage.veragi</groupId>
+    <artifactId>veragi-banco-abc</artifactId>
+    <version>0.0.1</version>
+    <packaging>jar</packaging>
+
+    <name>veragi-banco-abc</name>
+    <description>Integration Services for Banco ABC</description>
+
+    <properties>
+        <!-- Build -->
+        <java.version>11</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- Spring Configs -->
+        <resource.delimiter>@</resource.delimiter>
+        <spring-boot.version>2.5.6</spring-boot.version>
+        <spring-cloud.version>2020.0.4</spring-cloud.version>
+        <spring-cloud-security.version>2.2.5.RELEASE</spring-cloud-security.version>
+        <spring-boot-admin.version>2.5.2</spring-boot-admin.version>
+        <spring-cloud-aws.version>2.2.6.RELEASE</spring-cloud-aws.version>
+        <aws-secretsmanager-jdbc.version>1.0.6</aws-secretsmanager-jdbc.version>
+        <spring-cloud-gcp.version>1.2.8.RELEASE</spring-cloud-gcp.version>
+        <springdoc.version>1.5.2</springdoc.version>
+        <!-- Helper Libs -->
+        <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
+        <!-- automatically run annotation processors within the incremental compilation -->
+        <m2e.apt.activation>jdt_apt</m2e.apt.activation>
+    </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>access-nexus</id>
+            <name>Accesstage Release</name>
+            <url>http://nexus-prd1.accesstage.com.br/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>access-nexus</id>
+            <url>http://nexus-prd1.accesstage.com.br/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>access-nexus</id>
+            <name>Accesstage Release</name>
+            <url>http://nexus-prd1.accesstage.com.br/nexus/content/repositories/releases/</url>
+        </repository>
+        <repository>
+            <id>access-nexus-snapshot</id>
+            <name>Accesstage Snapshot</name>
+            <url>http://nexus-prd1.accesstage.com.br/nexus/content/repositories/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Boot Dependencias Padrao -->
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Spring Boot Dependencias Padrao -->
+            <!-- Spring Cloud Dependencias Padrao -->
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-security-dependencies</artifactId>
+                <version>${spring-cloud-security.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-aws-dependencies</artifactId>
+                <version>${spring-cloud-aws.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.amazonaws.secretsmanager</groupId>
+                <artifactId>aws-secretsmanager-jdbc</artifactId>
+                <version>${aws-secretsmanager-jdbc.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-gcp-dependencies</artifactId>
+                <version>${spring-cloud-gcp.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Spring Cloud Dependencias Padrao -->
+            <!-- Spring Admin -->
+
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-dependencies</artifactId>
+                <version>${spring-boot-admin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Spring Admin -->
+            <!-- SpringDoc OpenAPI -->
+
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-data-rest</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
+
+            <!-- SpringDoc OpenAPI -->
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Libs Commons -->
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${org.mapstruct.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Libs Commons -->
+
+        <!-- Spring AWS -->
+        <!--dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-aws-secrets-manager-config</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-aws-parameter-store-config</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.amazonaws.secretsmanager</groupId>
+            <artifactId>aws-secretsmanager-jdbc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-aws</artifactId>
+        </dependency-->
+
+        <!-- Spring AWS -->
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>
+
+        <!-- Banco Dados + Sring Data -->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+
+        <!-- Banco Dados + Sring Data -->
+        <!-- Spring Comunicacao entre Servicos -->
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+        <!-- Spring Comunicacao entre Servicos -->
+
+        <!-- Spring MVC -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+        <!-- Spring MVC -->
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <properties>
+                <activatedProperties>local</activatedProperties>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>dev2</id>
+            <properties>
+                <activatedProperties>dev2</activatedProperties>
+            </properties>
+        </profile>
+        <profile>
+            <id>dev1</id>
+            <properties>
+                <activatedProperties>dev1</activatedProperties>
+            </properties>
+        </profile>
+        <profile>
+            <id>homolog2</id>
+            <properties>
+                <activatedProperties>homolog2</activatedProperties>
+            </properties>
+        </profile>
+        <profile>
+            <id>homolog1</id>
+            <properties>
+                <activatedProperties>homolog1</activatedProperties>
+            </properties>
+        </profile>
+        <profile>
+            <id>qa2</id>
+            <properties>
+                <activatedProperties>qa2</activatedProperties>
+            </properties>
+        </profile>
+        <profile>
+            <id>qa1</id>
+            <properties>
+                <activatedProperties>qa1</activatedProperties>
+            </properties>
+        </profile>
+        <profile>
+            <id>demo</id>
+            <properties>
+                <activatedProperties>demo</activatedProperties>
+            </properties>
+        </profile>
+        <profile>
+            <id>pre-prod</id>
+            <properties>
+                <activatedProperties>preprod</activatedProperties>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <activatedProperties>prod</activatedProperties>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
